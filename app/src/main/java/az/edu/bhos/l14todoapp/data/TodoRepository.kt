@@ -21,9 +21,8 @@ class TodoRepositoryImpl(
     }
 
     override fun observeTodoEntries(): Flow<List<TodoEntity>> {
-        return flowOf(emptyList())
-
-        // todo use the following line with correct mapper
-//        return localData.observeItems()
+        return localData.observeItems().map { todoLocalDtoList ->
+            todoLocalDtoList.map { it.toEntity() }
+        }
     }
 }
